@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sensui Useless Api's + Sensui ChatBot</title>
+  <link href="https://i.imgur.com/38RT99Z.jpg" rel="icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Teko&display=swap'); /* Futuristic Font */
+        
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+        }
+        
+        .header {
+          position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px 20px;
+            background-color: #111;
+            z-index: 9999;
+            
+        }
+        
+        .content {
+            padding-top: 50px;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            background-color: #fff;
+            
+            
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #111;
+            min-width: 160px;
+            box-shadow: none;
+            padding: 0;
+            z-index: 1;
+            margin-top: 30px;
+            margin-left: -20px; /* Added spacing to the left side */
+            border: 2px solid #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            animation: glow-effect 4s infinite;
+            transition: background-color 0.3s ease-in-out;
+         animation: glow-effect 4s infinite;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .button {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 7px 13px;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Teko', sans-serif; /* Futuristic Font */
+            font-size: 16px; /* Adjusted font size */
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            animation: glow-effect 4s infinite;
+            transition: background-color 0.3s ease-in-out; /* Added transition */
+        }
+        
+        .button:hover {
+            background-color: #111;
+            
+        }
+        
+        .sub-menu {
+           background-color: transparent;
+            display: none;
+    padding-left: 40px;
+    max-height: 500px; /* Set a maximum height for the sub-menu */
+    overflow-y: auto;
+        }
+        
+        .show-sub-menu {
+            display: block;
+        }
+        
+        .welcome-text {
+            text-align: center;
+            margin: 40px auto;
+          
+            font-size: 20px;
+            animation: fade-in 1.5s ease-in-out; /* Fade-in animation */
+        }
+
+
+        /* Fade-in Animation Keyframes */
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .menu-icon {
+            display: block;
+            width: 16px;
+            height: 2px;
+            background-color: #000;
+            margin-bottom: 3px;
+        }
+        
+        .info-box {
+            margin: 50px auto;
+            padding: 20px;
+            border: 2px solid #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            animation: glow-effect 4s infinite;
+            transition: background-color 0.3s ease-in-out;
+         animation: glow-effect 4s infinite;
+            max-width: 300px;
+            background-color: #111; /* Added */
+          
+        }
+        
+        .info-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+          font-family: 'Teko', sans-serif; /* Futuristic Font */
+        }
+        
+        .social-media-icons {
+            text-align: center;
+            margin: 20px auto;
+        }
+        
+        .social-icon {
+            display: inline-block;
+            margin: 0 5px;
+            width: 40px;
+            height: 40px;
+            background-color: #111;
+            border-radius: 50%;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+            border: 2px solid #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            animation: glow-effect 4s infinite;
+            transition: background-color 0.3s ease-in-out;
+         animation: glow-effect 4s infinite;
+          font-family: 'Teko', sans-serif; /* Futuristic Font */
+        }
+
+        .social-icon:hover {
+            background-color: #555;
+        }
+
+        /* Futuristic Font for Header */
+        .header h1 {
+            font-family: 'Teko', sans-serif;
+            font-size: 20px;
+            margin: 0;
+            border: 2px solid #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            animation: glow-effect 4s infinite;
+            transition: background-color 0.3s ease-in-out;
+         animation: glow-effect 4s infinite;
+        }
+
+        @keyframes glow-effect {
+            0% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; }
+            25% { border-color: #00ff00; box-shadow: 0 0 10px #00ff00; }
+            50% { border-color: #0000ff; box-shadow: 0 0 10px #0000ff; }
+            75% { border-color: #00ffff; box-shadow: 0 0 10px #00ffff; }
+            100% { border-color: #ff00ff; box-shadow: 0 0 10px #ff00ff; }
+        }
+        
+        @media (min-width: 768px) {
+            .dropdown-content {
+                min-width: 200px;
+                margin-top: 0; /* Adjusted */
+            }
+        }
+
+      .chat-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+        align-self: right;
+        
+  
+  
+        
+}
+
+.message {
+  display: inline-block;
+  max-width: 100%;
+  padding: 5px 10px;
+  margin: 5px 0;
+  border: 2px solid #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            animation: glow-effect 4s infinite;
+            transition: background-color 0.3s ease-in-out;
+         animation: glow-effect 4s infinite;
+}
+
+.user-message {
+  background-color: #007bff;
+  color: #fff;
+  
+  border: 2px solid #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            animation: glow-effect 4s infinite;
+            transition: background-color 0.3s ease-in-out;
+         animation: glow-effect 4s infinite;
+  text-align: right;
+  align-items: right;
+  align-self: right;
+}
+
+.bot-message {
+  background-color: #f0f0f0;
+  color: #333;
+  
+  align-self: left;
+  text-align: left;
+  align-items: left;
+  border: 2px solid #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            animation: glow-effect 4s infinite;
+            transition: background-color 0.3s ease-in-out;
+         animation: glow-effect 4s infinite;
+}
+
+.sender {
+  font-weight: bold;
+  color: #fff;
+  text-align: right;
+  align-items: right;
+}
+
+#user-input {
+  margin-top: 10px;
+  display: flex;
+  
+            
+  color: #fff;
+  
+}
+
+#message-input {
+  flex: 1;
+  padding: 5px;
+  border: 2px solid #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            animation: glow-effect 4s infinite;
+            transition: background-color 0.3s ease-in-out;
+         animation: glow-effect 4s infinite;
+  background-color: #111;
+  color: #fff;
+  margin: 0 5px;
+  
+}
+
+#send-button {
+  padding: 5px 10px;
+  background-color: #111;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border: 2px solid #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            animation: glow-effect 4s infinite;
+            transition: background-color 0.3s ease-in-out;
+         animation: glow-effect 4s infinite;
+  margin: 0 5px;
+        }
+
+      .bot-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        align-self: center;
+  text-align: center;
+  align-items: center;
+      }
+
+      .redirect-button {
+      padding: 15px 30px;
+      color: white;
+      cursor: pointer;
+      text-decoration: none; /* Remove default underline */
+        border: 2px solid #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            animation: glow-effect 4s infinite;
+            transition: background-color 0.3s ease-in-out;
+         animation: glow-effect 4s infinite;
+      align-self: center;
+  text-align: center;
+  align-items: center;
+        font-family: 'Teko', sans-serif; /* Futuristic Font */
+        position: center;
+      }
+      
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="dropdown">
+            <div class="menu-icon"></div>
+            <div class="menu-icon"></div>
+            <div class="menu-icon"></div>
+            <div class="dropdown-content">
+                <button class="button" onclick="toggleSubMenu('toolsSubMenu')">Tools</button>
+                <div class="sub-menu" id="toolsSubMenu">
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/ai?question=hi')">Gpt Ai</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/bard?question=hi')">Bard Ai</button>
+                   <button class="button" onclick="redirectTo(' https://sensui-useless-apis.codersensui.repl.co/api/tools/blackai?question=hi')">BlackBox Ai</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/generateQR?text=hi')">Generate Qr</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/genimg?prompt=Dog&model=md')">GenImg Md</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/genimg?prompt=Dog&model=sd')">GenImg Sd</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/tiktokdl?url=url here')">Dl Tiktok Video</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/readQR?photoLink=qr photo link here')">Read Qr</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/random-info')">Random Info</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/image-compression?url=your%20image%20link%20here')">Image Compression</button>
+                       <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/recipe?food=spaghetti')">Food Recipe</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/passgen')">Password Generator</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/biblerandom')">Random Bible Verse</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/bibledaily')">Daily Bible Verse</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/news')">News PH</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/unscramble?word=amide')">Unscramble Words</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/ce?base=PHP&target=USD&amount=100')">Currency Converter</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/foodpic?query=pasta')">Food Photo</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/weather/manila')">Weather Checker</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/dictionary?word=hello')">Dictionary</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/country-guide?countryName=Philippines')">Country Guide</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/ip')">Ip Fetch</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/grammar?text=your input')">Grammar Checker</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/send-email?to=recipient email&subject=your subject&text=your message')">Send A Email</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/lorem-ipsum?length=100')">Lorem Ipsum</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/lorem-picsum')">Lorem Picsum</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/lorem-picsumV2')">Lorem Picsum V2</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/lyrics?artist=optional&song=song name')">Lyrics Finder</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/ytsearch?title=video title')">Yt Video Search</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/ytdlmp4?url=video link')">Yt Video Dl</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/morsecode-text?morsecode=input here')">Morse Code To Text</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/text-morsecode?text=input here')">Text To Morse Code</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/binary-text?binary=input here')">Binary To Text</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/text-binary?text=input here')">Text To Binary</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/nekobin?code=input here')">Nekobin Paste</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/paste?text=input here')">Direct Paste</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/pastebin?text=input here')">Pastebin Paste</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/ocr?imageUrl=image link here')">Ocr</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/ss?url=url link here')">Screen Shot A Website</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/translate?msg=input here&to=en or other countries language code like for tagalog tl and for english en')">Translate</button>
+                   <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/genpic?prompt=dog')">Pollinations Ai</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/ccgen?type=Visa')">Cc Gen</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/paraphrase?text=Apple%20is%20a%20sweet%20and%20delicious%20fruit%20that%20is%20very%20healthy.%20It%20is%20also%20a%20good%20disease-fighter%20and%20we%20can%20eat%20it%20every%20day.%20The%20delicious%20taste%20and%20bright%20colour%20of%20the%20food%20make%20it%20even%20more%20appealing.%20Moreover,%20it%20is%20a%20versatile%20fruit%20which%20we%20can%20use%20in%20many%20dishes.%20In%20an%20essay%20on%20apple,%20we%20will%20learn%20how%20many%20benefits%20it%20offers.')">Paraphraser</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/tools/news')">Telegraph Uploader</button>
+                </div>
+                <button class="button" onclick="toggleSubMenu('funSubMenu')">Fun</button>
+                <div class="sub-menu" id="funSubMenu">
+                    <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/catpic')">Cat Picture</button>
+                    <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/dogpic')">Dog Picture</button>
+                    <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/catfact')">Random Cat Fact</button>
+                  <button 
+                    class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/dogfact')">Random Dog Fact</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/wouldyourather')">Would You Rather</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/neverhaveiever')">Never Have I Ever</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/paranoia')">Paranoia</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/dare')">Dare</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/truth')">Truth</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/joke')">Joke</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/autobanfb')">Fb Ban</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/quote')">Quote</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/texoji?emoji=your emoji&text=your input')">Texoji</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/age?name=sensui')">Age</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/bored')">Bored</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/todo')">To do</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/advice')">Advice</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/facts')">Fact</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/advice')">Advice</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/beshie?jeje=your input')">Beshifier</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/emoji?text=hi')">Emoji Reaction</button>
+                  <button class="button" onclick="redirectTo('https://sensui-useless-apis.codersensui.repl.co/api/fun/jejetext?convert=your%20input')">Jejeme Api</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div class="content">
+    <div class="welcome-text">
+        <h2 class="welcome-head">Welcome to Sensui Useless API's</h2>
+        <p>Explore our collection of useless APIs that serve no practical purpose but might bring some fun and entertainment to your projects.</p>
+        <audio autoplay loop>
+    <source src="public/main.mp3">
+  </audio>
+    </div>
+
+<div class="info-box">
+    <div class="chat-container" id="chat-box">
+      
+      <h2 class="bot-title">Sensui ChatBot</h2>
+      <!-- Sensui's welcome message -->
+          <div class="message">
+    <span class="sender">Sensui : </span> Ah, greetings, dear interlocutor! Sensui, at your service! Pray, share thy inquiry and allow my spectral wisdom to illuminate your path!<br>Hi, how may I assist thee on this fine occasion?
+        </div>
+                <div class="message">
+    <span class="sender">Sensui : </span> Here are some amazing commands you can try:
+    <ul>
+      <li>/advice - Get a random piece of advice</li>
+      <li>/dictionary [word] - Get the definition of a word from the dictionary</li>
+      <li>/shoti - Receive a random shoti video</li>
+      <li>/titkokdl [tiktok video link] - Download The Tiktok Video</li>
+      <li>/commands - View All Available Commands</li>
+    </ul>
+    </div>
+    </div>
+
+    <!-- User input section -->
+    <div id="user-input">
+      <input type="text" id="message-input" placeholder="Type your message...">
+      <button id="send-button">Send</button>
+    </div>
+</div>
+      
+  <div class="info-box">
+    <h3 class="info-title">Your Information</h3>
+    <p id="battery-level"></p>
+    <p id="ip-info"></p>
+    <p id="location-info"></p>
+    <p id="browser-info"></p>
+    <p id="system-info"></p>
+    <p id="device-type"></p>
+    <p id="device-name"></p>
+    <p id="screen-resolution"></p>
+    <p id="language-info"></p>
+    <p id="timezone-info"></p>
+    <p id="internet-speed"></p>
+    <p id="browser-version"></p>
+    <p id="platform-info"></p>
+    <p id="connection-info"></p>
+    <p id="memory-info"></p>
+    <p id="orientation-info"></p>
+    <p id="referrer-url-info"></p>
+    <p id="total-storage"></p>
+<p id="used-storage"></p>
+
+</div>
+
+
+   
+
+    <div class="social-media-icons">
+        <a class="social-icon" href="https://www.facebook.com/JeanLewis345" target="_blank"><span>FB</span></a>
+        <a class="social-icon" href="https://t.me/CoderSensui" target="_blank"><span>TG</span></a>
+        <a class="social-icon" href="https://github.com/CoderSensui" target="_blank"><span>GIT</span></a>
+        <a class="social-icon" href="https://replit.com/@CoderSensui" target="_blank"><span>REPL</span></a>
+    </div>
+
+    <script>
+        function redirectTo(url) {
+            window.location.href = url;
+        }
+        
+        function toggleSubMenu(subMenuId) {
+            const subMenu = document.getElementById(subMenuId);
+            subMenu.classList.toggle('show-sub-menu');
+        }
+
+        function getBatteryLevel() {
+            navigator.getBattery().then(function(battery) {
+                var batteryLevel = Math.floor(battery.level * 100);
+                document.getElementById('battery-level').textContent = 'Battery Level: ' + batteryLevel + '%';
+            });
+        }
+
+        function getIPAddress() {
+            fetch('https://api.ipify.org?format=json')
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    document.getElementById('ip-info').textContent = 'IP Address: ' + data.ip;
+                });
+        }
+
+        function getLocationInfo() {
+            fetch('https://ipapi.co/json/')
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    var locationInfo = 'Location: ' + data.city + ', ' + data.region + ', ' + data.country_name;
+                    document.getElementById('location-info').textContent = locationInfo;
+                });
+        }
+
+        function getBrowserInfo() {
+            var userAgent = navigator.userAgent;
+            var browserInfo = 'Unknown Browser';
+            
+            if (userAgent.indexOf('Chrome') > -1) {
+                browserInfo = 'Chrome';
+            } else if (userAgent.indexOf('Firefox') > -1) {
+                browserInfo = 'Firefox';
+            } else if (userAgent.indexOf('Safari') > -1) {
+                browserInfo = 'Safari';
+            } else if (userAgent.indexOf('Edge') > -1) {
+                browserInfo = 'Microsoft Edge';
+            } else if (userAgent.indexOf('Opera') > -1 || userAgent.indexOf('OPR') > -1) {
+                browserInfo = 'Opera';
+            } else if (userAgent.indexOf('Trident') > -1) {
+                browserInfo = 'Internet Explorer';
+            }
+            
+            document.getElementById('browser-info').textContent = 'Browser: ' + browserInfo;
+        }
+
+        function getSystemInfo() {
+            var platform = navigator.platform;
+            var systemInfo = 'Unknown System';
+            
+            if (platform.indexOf('Win') > -1) {
+                systemInfo = 'Windows';
+            } else if (platform.indexOf('Mac') > -1) {
+                systemInfo = 'Mac OS';
+            } else if (platform.indexOf('Linux') > -1) {
+                systemInfo = 'Linux';
+            } else if (platform.indexOf('Android') > -1) {
+                systemInfo = 'Android';
+            } else if (platform.indexOf('iPhone') > -1 || platform.indexOf('iPad') > -1 || platform.indexOf('iPod') > -1) {
+                systemInfo = 'iOS';
+            }
+            
+            document.getElementById('system-info').textContent = 'System: ' + systemInfo;
+        }
+
+        function getCurrentTime() {
+            var currentTime = new Date();
+            var hours = currentTime.getHours();
+            var minutes = currentTime.getMinutes();
+            var seconds = currentTime.getSeconds();
+            var timeInfo = 'Time: ' + hours + ':' + minutes + ':' + seconds;
+            document.getElementById('time-info').textContent = timeInfo;
+        }
+
+function getDeviceType() {
+        var deviceType = '';
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            deviceType = 'Mobile';
+        } else if (/Mac|Macintosh|Windows|Linux/i.test(navigator.userAgent)) {
+            deviceType = 'Desktop/Laptop';
+        } else {
+            deviceType = 'Unknown';
+        }
+        document.getElementById('device-type').textContent = 'Device Type: ' + deviceType;
+    }
+
+    function getScreenResolution() {
+        var resolution = window.innerWidth + 'x' + window.innerHeight;
+        document.getElementById('screen-resolution').textContent = 'Screen Resolution: ' + resolution;
+    }
+
+    function getLanguageInfo() {
+        var language = navigator.language;
+        document.getElementById('language-info').textContent = 'Language: ' + language;
+    }
+
+    function getTimezoneInfo() {
+        var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        document.getElementById('timezone-info').textContent = 'Timezone: ' + timezone;
+    }
+
+    // Fetching internet connection speed requires the Network Information API
+    function getInternetSpeed() {
+        if ('connection' in navigator) {
+            var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            var internetSpeed = connection.downlink + ' Mbps';
+            document.getElementById('internet-speed').textContent = 'Internet Speed: ' + internetSpeed;
+        }
+    }
+
+    // Fetching geolocation requires user permission
+    function getBrowserVersion() {
+        var userAgent = navigator.userAgent;
+        var browserVersion = userAgent.match(/(Chrome|Firefox|Safari|Edge|Opera|Trident)\/?\s*(\.?\d+(\.\d+)*)/);
+        if (browserVersion) {
+            document.getElementById('browser-version').textContent = 'Browser Version: ' + browserVersion[2];
+        }
+    }
+
+function getPlatformInfo() {
+        var platform = navigator.platform;
+        document.getElementById('platform-info').textContent = 'Platform: ' + platform;
+    }
+
+    function getConnectionType() {
+        var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        var connectionType = connection ? connection.effectiveType : 'Unknown';
+        document.getElementById('connection-info').textContent = 'Connection Type: ' + connectionType;
+    }
+
+    function getDeviceMemory() {
+        var memory = navigator.deviceMemory || 'Unknown';
+        document.getElementById('memory-info').textContent = 'Device Memory: ' + memory + ' GB';
+    }
+
+    function getDeviceOrientation() {
+        var orientation = screen.orientation || screen.mozOrientation || screen.msOrientation;
+        var orientationType = orientation ? orientation.type : 'Unknown';
+        document.getElementById('orientation-info').textContent = 'Device Orientation: ' + orientationType;
+    }
+
+    function getReferrerURL() {
+        var referrer = document.referrer || 'Direct visit';
+        document.getElementById('referrer-url-info').textContent = 'Referrer URL: ' + referrer;
+    }
+    
+   
+
+function getStorageInfo() {
+  if (navigator.storage && navigator.storage.estimate) {
+    navigator.storage.estimate().then(function(estimate) {
+      var totalStorage = estimate.quota;
+      var usedStorage = estimate.usage;
+      document.getElementById('total-storage').textContent = 'Total Storage: ' + (totalStorage / (1024 * 1024)).toFixed(2) + ' MB';
+      document.getElementById('used-storage').textContent = 'Used Storage: ' + (usedStorage / (1024 * 1024)).toFixed(2) + ' MB';
+    });
+  }
+}
+
+      function getDeviceName() {
+  var deviceName = navigator.userAgent;
+  document.getElementById('device-name').textContent = 'Device Name: ' + deviceName;
+      }
+
+      const chatBox = document.getElementById('chat-box');
+const messageInput = document.getElementById('message-input');
+const sendButton = document.getElementById('send-button');
+
+// Function to display a message in the chat box
+
+function displayMessage(sender, message) {
+  const messageElement = document.createElement('div');
+  messageElement.className = 'message';
+
+  // Replace new line characters with <br> tags
+  message = message.replace(/\n/g, '<br>');
+
+  // Check if the message is a command (starts with '/')
+if (sender === 'You' && message.startsWith('/')) {
+    const commandElement = document.createElement('span');
+    commandElement.className = 'command';
+    commandElement.textContent = message;
+    commandElement.addEventListener('click', () => {
+      handleUserCommand(message); // Handle the command when clicked
+    });
+
+    messageElement.innerHTML = `<span class="sender">${sender} :</span> `;
+    messageElement.appendChild(commandElement);
+  } else {
+    // Regular message
+    messageElement.innerHTML = `<span class="sender">${sender} :</span> ${message}`;
+    if (sender !== 'You') {
+      // Add click event listener to bot messages
+      messageElement.addEventListener('click', () => {
+        handleBotMessage(message); // Handle bot message when clicked
+      });
+    }
+  }
+
+  chatBox.appendChild(messageElement);
+  chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom of the chat box
+      }
+      
+//commands available
+function displayCommands() {
+  const commandsList = [
+    "/advice - Get a random piece of advice",
+    "/dictionary [word] - Get the definition of a word from the dictionary",
+    "/shoti - Receive a random shoti video",
+    "/tiktokdl [tiktok video link] - Download The Tiktok Video",
+        "/lyrics [song name] - Fetch The Lyrics For The Song",
+        "/newsph - Latest News From Philippines",
+    // Add more commands here if needed
+  ];
+
+  const commandsText = commandsList.join("\n");
+
+  displayMessage('Sensui', "Here are the available commands:\n\n" + commandsText);
+}
+
+      
+      
+// Function to handle user input and fetch API response
+      
+function handleUserInput() {
+  const userMessage = messageInput.value.trim();
+  if (userMessage !== '') {
+    displayMessage('You', userMessage); // Display user's command message
+
+    if (userMessage === '/advice') {
+      fetchRandomAdvice();
+    } else if (userMessage === '/shoti') {
+      fetchRandomVideo();
+      } else if (userMessage.startsWith('/short ')) {
+      const url = userMessage.substring('/short '.length);
+      handleShortUrlCommand(url);
+      } else if (userMessage === '/newsph') {
+      fetchNewsPH();
+      } else if (userMessage.startsWith('/lyrics ')) {
+      const songName = userMessage.substring('/lyrics '.length);
+      fetchLyrics(songName);
+  } else if 
+      (userMessage === '/commands') {
+    displayCommands();
+    } else if 
+    (userMessage.startsWith('/dictionary ')) {
+      const word = userMessage.substring('/dictionary '.length);
+      fetchDictionaryDefinition(word);
+         
+    } else if (userMessage.startsWith('/tiktokdl')) {
+      const tiktokUrl = userMessage.substring('/tiktokdl '.length);
+      fetchTikTokVideo(tiktokUrl);
+    } else {
+      // Fetch API for general user messages
+      const apiUrl = `https://sensui-useless-apis.codersensui.repl.co/api/tools/ai?question=act like your sensui from ghost fighter or yu yu hakusho when you answer my question, now here is my question ${encodeURIComponent(userMessage)}`;
+      fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          const botResponse = data.answer;
+          displayMessage('Sensui', botResponse);
+        })
+        .catch((error) => {
+          displayMessage('Sensui', "Error, It Seems I Can't Answer Your Question For Now");
+        });
+      // Display Invalid Command message
+      
+    }
+
+    // Clear input field
+    messageInput.value = '';
+  }
+}
+
+
+      
+
+// Event listener for user input
+sendButton.addEventListener('click', handleUserInput);
+messageInput.addEventListener('keyup', (event) => {
+  if (event.key === 'Enter') {
+    handleUserInput();
+  }
+});
+
+function getUserName() {
+    const userName = localStorage.getItem('userName');
+    return userName || null;
+  }
+
+  // Function to set the user's name in localStorage
+  function setUserName(userName) {
+    localStorage.setItem('userName', userName);
+  }
+
+  // Function to update the welcome messages
+  function updateWelcomeMessages() {
+  const userName = getUserName();
+
+  if (!userName) {
+    const userNameInput = prompt("Please enter your name:");
+    if (userNameInput) {
+      setUserName(userNameInput);
+      updateWelcomeMessages();
+    }
+  } else {
+    const chatBoxWelcomeMessage = `𝗦𝗲𝗻𝘀𝘂𝗶 : Ah, greetings, dear ${userName}! Sensui, at your service! Pray, share thy inquiry and allow my spectral wisdom to illuminate your path!<br>Hi, how may I assist thee on this fine occasion?`;
+
+
+    const fullWelcomeMessage = chatBoxWelcomeMessage;
+    const existingMessageElement = document.querySelector('.message');
+    if (existingMessageElement) {
+      existingMessageElement.innerHTML = fullWelcomeMessage.replace(/\n/g, '<br>');
+    } else {
+      const messageElement = document.createElement('div');
+      messageElement.className = 'message';
+      messageElement.innerHTML = fullWelcomeMessage.replace(/\n/g, '<br>');
+      chatBox.appendChild(messageElement);
+    }
+
+    chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom of the chat box
+
+    const infoBoxWelcomeMessage = `Hi ${userName}! Welcome to Sensui Useless API's.`;
+    document.querySelector('.welcome-text h2').textContent = infoBoxWelcomeMessage;
+  }
+}
+
+// Call the function to update the welcome messages
+updateWelcomeMessages();
+    
+
+      function fetchDictionaryDefinition(word) {
+  const apiUrl = `https://sensui-useless-apis.codersensui.repl.co/api/tools/dictionary?word=${encodeURIComponent(word)}`;
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      const definition = data.definition;
+      displayMessage('Sensui', definition);
+    })
+    .catch((error) => {
+      displayMessage('Sensui', "Error, Unable to fetch the dictionary definition for now.");
+    });
+}
+
+function handleShortUrlCommand(url) {
+  const apiUrl = `https://url.codersensui.repl.co/api/urlshort?url=${url}`;
+
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.shortUrl) {
+        const message = `Here is the shortened URL: ${data.shortUrl}`;
+        displayMessage('Sensui', message);
+      } else {
+        const errorMessage = "Error creating the short URL. Please try again later.";
+        displayMessage('Sensui', errorMessage);
+      }
+    })
+    .catch((error) => {
+      const errorMessage = "Error creating the short URL. Please try again later.";
+      displayMessage('Sensui', errorMessage);
+    });
+      }
+      
+          
+
+      function fetchRandomAdvice() {
+  const apiUrl = 'https://sensui-useless-apis.codersensui.repl.co/api/fun/advice';
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      const advice = data.advice;
+      displayMessage('Sensui', advice);
+    })
+    .catch((error) => {
+      displayMessage('Sensui', "Error, Unable to fetch random advice for now.");
+    });
+      }
+
+ function fetchRandomVideo() {
+  const apiUrl = "https://shoti-api.libyzxy0.repl.co/api/get-shoti?apikey=shoti-1h72u81su7o9f8h05k";
+
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      const videoUrl = data.data.url;
+      const username = data.user.username;
+      const tiktokProfileLink = `https://www.tiktok.com/@${username}`;
+      sendVideoMessage(videoUrl, tiktokProfileLink);
+    })
+    .catch((error) => {
+      displayMessage('Sensui', "Error fetching the random shoti video. Please try again later.");
+    });
+}
+
+function sendVideoMessage(videoUrl, tiktokProfileLink) {
+  const messageElement = document.createElement('div');
+  messageElement.className = 'message';
+  messageElement.innerHTML = `<span class="sender">Sensui : </span>Uy Shawty Parehh<br>Account ng Shoti : <a href="${tiktokProfileLink}" target="_blank">@${tiktokProfileLink.substring(26)}</a><br><video width="270" height="250" controls autoplay volume="1"><source src="${videoUrl}" type="video/mp4">Your browser does not support the video tag.</video>`;
+  
+  chatBox.appendChild(messageElement);
+  chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom of the chat box
+}
+      
+          function fetchTikTokVideo(url) {
+  const apiUrl = `https://sensui-useless-apis.codersensui.repl.co/api/tools/tiktokdl?url=${encodeURIComponent(url)}`;
+
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      const nickname = data.nickname;
+      const username = data.username;
+      const tiktokProfileLink = `https://www.tiktok.com/@${username}`;
+      const messageElement = document.createElement('div');
+      messageElement.className = 'message';
+      messageElement.innerHTML = `<span class="sender">Sensui :</span> Here is the downloaded TikTok video<br><br>Poster Info:<br>Name: ${nickname}<br>Username: <a href="${tiktokProfileLink}" target="_blank">@${username}</a><br><br><video width="270" height="250" controls autoplay volume="1"><source src="${data.noWatermarkHd}" type="video/mp4">Your browser does not support the video tag.</video>`;
+      chatBox.appendChild(messageElement);
+      chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom of the chat box
+    })
+    .catch((error) => {
+      displayMessage('Sensui', "Error fetching the TikTok video. Please try again later.");
+    });
+      }
+      
+function fetchNewsPH() {
+  const apiUrl = "https://sensui-useless-apis.codersensui.repl.co/api/tools/news";
+
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      // Extract and display the news titles and sources
+      const newsList = data.map((news) => `- ${news.title} (${news.source})`);
+      const newsText = newsList.join("\n");
+
+      displayMessage('Sensui', "Here are the latest news from the Philippines:\n\n" + newsText);
+    })
+    .catch((error) => {
+      displayMessage('Sensui', "Error fetching the news. Please try again later.");
+    });
+      }
+
+// Function to fetch lyrics and display them
+function fetchLyrics(songName) {
+  const apiUrl = `https://sensui-useless-apis.codersensui.repl.co/api/tools/lyrics?song=${encodeURIComponent(songName)}`;
+
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      const lyrics = data.lyrics;
+      const title = data.title;
+      const artist = data.artist;
+      const imageUrl = data.image;
+      displayLyricsMessage(title, artist, lyrics, imageUrl);
+    })
+    .catch((error) => {
+      displayMessage('Sensui', "Error fetching the lyrics. Please try again later.");
+    });
+}
+
+// Function to display lyrics and image in a single message
+function displayLyricsMessage(title, artist, lyrics, imageUrl) {
+  const messageElement = document.createElement('div');
+  messageElement.className = 'message';
+
+  const lyricsHtml = lyrics.replace(/\n/g, '<br>');
+  const messageHtml = `
+    <span class="sender">Sensui :</span>
+    <br>
+    <strong>Song Title:</strong> ${title}
+    <br>
+    <strong>Song Artist:</strong> ${artist}
+    <br><br>
+    <strong>Lyrics:</strong>
+    <br>
+    ${lyricsHtml}
+    <br><br>
+    <img src="${imageUrl}" alt="Song Image" style="max-width: 100%">
+  `;
+
+  messageElement.innerHTML = messageHtml;
+
+  chatBox.appendChild(messageElement);
+  chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom of the chat box
+  }
+      
+      
+
+
+        getBatteryLevel();
+        getIPAddress();
+        getLocationInfo();
+        getBrowserInfo();
+        getSystemInfo();
+        setInterval(getCurrentTime, 1000);
+        getDeviceType();
+    getScreenResolution();
+    getLanguageInfo();
+    getTimezoneInfo();
+    getInternetSpeed();
+    getBrowserVersion();
+    getPlatformInfo();
+    getConnectionType();
+    getDeviceMemory();
+    getDeviceOrientation();
+    getReferrerURL();
+    getDeviceName();
+    getStorageInfo();
+    
+    </script>
+</body>
+                  </html>
+                  
